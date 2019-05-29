@@ -141,8 +141,9 @@ router.post('/reg',(req,res)=>{
         `Dear ${record.name} , <br>
         Thank You For Registering With us.
         <br> 
-        Your Mobile Number <strong> ${record.phn}</strong> will be your User Id To Login & Password will be <strong> ${record.password}</strong>
-
+        Now You can Login To Our Website Using
+        <br>
+        Your Mobile Number <strong> ${record.phn}</strong> will be your User Id To Login & Password which you gave while Registation.
         <br>
         With Regards
         Team Milk Revolution
