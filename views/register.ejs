@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/reg.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <a href="/" class="btn btn-outline-dark btn-lg btn-block">Back</a>
+            <p class="h2 text-center">Register</p>
+            <form  action="/reg" method="POST">
+                <div class="preview text-center">
+                    <img class="preview-img" src="/images/cow.png" alt="Preview Image" width="200" height="200"/> 
+                </div>
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input class="form-control" :class="{'is-valid' : nameErr, 'is-invalid' : !nameErr}" type="text" v-model="name" name="name" required placeholder="Enter Your Full Name"/>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Enter Full Name
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="number" placeholder="987654321" class="form-control" v-model="phn" name="phn" :class="{'is-valid' : phnErr, 'is-invalid' : !phnErr}">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Give Correct Number
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input class="form-control" :class="{'is-valid' : emailErr, 'is-invalid' : !emailErr}" type="email" v-model="email" name="email" required placeholder="Enter Your Email"/>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Give Correct Email
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input class="form-control" :class="{'is-valid' : passwordErr, 'is-invalid' : !passwordErr}" type="password" v-model="password" name="password" required placeholder="Enter Password" @keyup="passLen"/>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Password Should be More than 8 Characters
+                    </div>
+                </div>
+                <div class="form-group">
+                <label>Re-Password:</label>
+                <input class="form-control" :class="{'is-valid' : password1Err, 'is-invalid' : !password1Err}" type="password" v-model="password1" name="password1" required placeholder="Enter Password" @keyup="passCheck"/>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Password Doesn't Match
+                </div>
+                </div>
+                <div class="form-group">
+                    <label>Roll</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="roll" v-model="roll">
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                </div>
+                <template v-if="buyer">
+                    <div class="form-group">
+                        <label for="">Shop Name</label>
+                        <input type="text" placeholder="Your Shop Name" name="shop" v-model="shop" class="form-control" :class="{'is-valid' : shopErr, 'is-invalid' : !shopErr}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Enter Your Shop Name
+                        </div>
+                    </div>
+                </template>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <textarea name="address" cols="10" rows="3" v-model="address" class="form-control" :class="{'is-valid' : addErr, 'is-invalid' : !addErr}" @leave=""></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Enter Your Address
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary btn-block" type="submit" value="Submit" :disabled="ook" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                name:'',
+                nameErr:false,
+                email:'',
+                emailErr:false,
+                password:'',
+                passwordErr:false,
+                password1: '',
+                password1Err:false,
+                phn:'',
+                phnErr:false,
+                shop:'',
+                shopErr:false,
+                address:'',
+                addErr:false,
+                ook :true,
+                roll:'buyer',
+                buyer:true,
+            },
+            methods: {
+                passLen(){
+                    if(this.password.length >=8){
+                        this.passwordErr = true
+                    }else{
+                        this.passwordErr = false
+                    }
+                },
+                passCheck(){
+                    if(this.password == this.password1){
+                        this.password1Err = true
+                    }else{
+                        this.password1Err = false
+                    }
+                }
+            },
+            watch: {
+                name(){
+                    if(this.name.length >=4){
+                        this.nameErr = true
+                    }else{
+                        this.nameErr = false
+                    }
+                },
+                email(){
+                    if(this.email.length >= 8){
+                        this.emailErr = true
+                    }else{
+                        this.emailErr = false
+                    }
+                },
+                address(){
+                    if(this.address.length >=10){
+                        this.addErr =true
+                    }else{
+                        this.addErr = false
+                    }
+                    if( this.nameErr && this.emailErr && this.password1Err && this.passwordErr && this.shopErr && this.addErr && this.phnErr){
+                        this.ook = false
+                    }
+                },
+                shop(){
+                    if(this.shop.length >=4){
+                        this.shopErr = true
+                    }else{
+                        this.shopErr = false
+                    }
+                },
+                phn(){
+                    if(this.phn.length == 10){
+                        this.phnErr = true
+                    }else{
+                        this.phnErr = false
+                    }
+                },
+                roll(){
+                    if(this.roll === 'seller'){
+                        this.shopErr = false
+                        this.buyer = true;
+                    }else{
+                        this.buyer = false;
+                        this.shopErr = true
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

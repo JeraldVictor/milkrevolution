@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sellers</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="/javascripts/vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <br><br>
+        <a  class="btn btn-secondary btn-lg btn-block" href="/">Home</a>
+        <br><br>
+        <div class="text-center">
+            <h1>Sellers Form</h1>
+            <strong style="color:red;text-decoration: underline"> For Registred Members Only</strong>
+            <small style="color:blue">  <a href="/reg">  If Not Registered Please Do Register Here</a> </small>
+        </div>
+        <br>
+        <% if(msg!=null){%>
+            <div id="flash" class="text-center alert alert-<%=alert%>">
+                <%=msg%>
+            </div>
+        <%}%>
+
+        <%if(list.length >0){%>
+            <form action="/seller" method="POST">
+                <div class="form-group">
+                    <label for="">Date & Time</label>
+                    <input type="text" name="date" id="" readonly class="form-control" :value="date">
+                </div>
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" required name="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="phn">Mobile Number</label>
+                    <input type="number" class="form-control" :class="{'is-valid' : !phnErr, 'is-invalid' : phnErr}" v-model="phn" id="phn" placeholder="Registered Mobile Number" name="phn" required>
+                    <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Give Correct Number
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="product">Select The Product</label>
+                    <select class="form-control" id="product" name="product">
+                        <%for(let i=0;i<list.length;i++){%>
+                                <option value="<%=list[i].title%>"><%=list[i].title%></option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="qt">Avilable Quantity</label>
+                    <input type="text" class="form-control" id="qt" placeholder="3 ltr" name="qt" required>
+                </div>
+                <div class="form-group">
+                    <label for="qt">Leave Message For Us</label>
+                    <textarea name="msg" id="" cols="10" rows="5" class="form-control" placeholder="Colect Product From me in This Time at this place or Call Us Soon ... if Nothing leave Nill in this box"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" :disabled="phnErr">Submit</button>
+                <br><br>
+                <br><br>
+            </form>
+        <%}%>
+        <br>
+        
+
+    </div>
+
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            phn:'',
+            phnErr:true,
+            date:''
+        },
+        watch: {
+            phn(){
+                if(this.phn.length === 10){
+                    this.phnErr = false
+                }else{
+                    this.phnErr = true
+                }
+            }
+        },
+        created() {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            let month = Number(date.getMonth() ) + 1
+            this.date =   date.getDate() + "/" + month  + "/" + date.getFullYear() + " - " + strTime;
+        },
+    })
+    </script>
+</body>
+</html>

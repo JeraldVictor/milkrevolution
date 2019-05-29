@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy | Milk Revolution</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar nav sticky-top navbar-dark bg-dark navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="/admin">Milk Revolution</a>
+                </div>
+                <ul class="nav justify-content-center">
+                    <li><h4 style="color:white">Sellers</h4></li>
+                </ul>
+                <ul class="nav justify-content-right">
+                <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="sidenav">
+            <ul>
+                <div style="margin-top:40px;"></div>
+                <li><p> Date {{date}}</p></li>
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/buy">Buyers</a></li>
+                <li><a class="act" href="/admin/sell">Sellers</a></li>
+                <li><a href="/admin/pending">Pending</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin/stock">Stock</a></li>
+                <li><a href="/admin/email">Email</a></li>
+            </ul>
+        </div>
+        <div class="main">
+                <h3 class="text-center">Seller(s) List</h3>
+            <%if(list.length < 1){%>
+                <div class="alert alert-secondary text-center" role="alert">
+                    No Seller(s) Found
+                </div>
+            <%}else{%>
+                <div class="scrollmenu">
+                   
+                    <table class="table table-dark text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Shop</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Transactions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for(let i =0;i<list.length;i++){%>
+                            <tr>
+                                <th scope="row">1</td>
+                                <td><%=list[i].name%></td>
+                                <td><%=list[i].phn%></td>
+                                <td><%=list[i].email%></td>
+                                <td><%=list[i].shop%></td>
+                                <td><%=list[i].address%></td>
+                                <td><a href="/admin/user/seller/<%=list[i].id%>" class="btn btn-light">View</a></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            <%}%>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            date:''
+        },
+        created() {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            let month = Number(date.getMonth() ) + 1
+            this.date =   date.getDate() + "/" + month  + "/" + date.getFullYear() ;
+        },
+    })
+    </script>
+</body>
+</html>

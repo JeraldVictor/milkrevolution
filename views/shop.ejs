@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/shop.css">
+</head>
+<body>
+    <div id="app">
+            <nav class="navbar nav sticky-top navbar-dark bg-dark navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Milk Revolution</a>
+                    </div>
+                    <ul class="nav justify-content-center">
+                        <li> <h4 > <a style="color:white;text-decoration: underline"  href="/buyer"> Our Shop</a></h4></li>
+                    </ul>
+                    <ul class="nav justify-content-right">
+                    <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <%if(list.length <= 0){%>
+                    <div> <br><br> <h1 class="text-center">No Items In Our Shoping List</h1> </div>
+                <%}%>
+                <div class="row">
+                    <%for(let i=0;i<list.length;i++){%>
+                    <div class="col" id="product">
+                        <div class="card text-center" style="width: 18rem;">
+                            <img src="data:image/png;base64,<%=list[i].image%>" class="card-img-top" alt="No Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><%=list[i].title%></h5>
+                                <div class="row">
+                                    <div class="col"> <span style="color: red"> ₹ <%=list[i].cost%></span> </div>
+                                    <div class="col" v-if="! <%=list[i].stock%>" > <span style="color: red"> Out Of Stock </span> </div>
+                                    <div class="col" v-else><a href="/buyer/product/<%=list[i].id%>" class="btn btn-outline-success btn-sm">Buy</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <br><br>
+            <div>
+                <p style="color:black;text-align: center">
+                    &copy; Team Milk Revolution | Jerald Victor
+                    <small class="text-center"> - All Rights Received</small>
+                </p>
+            </div>
+    </div>
+    <script src="/javascripts/vue.js"></script>
+    <script src="/javascripts/app.js"></script>
+</body>
+</html>

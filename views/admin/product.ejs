@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar nav sticky-top navbar-dark bg-dark navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="/admin">Milk Revolution</a>
+                </div>
+                <ul class="nav justify-content-center">
+                    <li><h4 style="color:white">Products Section</h4></li>
+                </ul>
+                <ul class="nav justify-content-right">
+                <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="sidenav">
+            <ul>
+                <div style="margin-top:40px;"></div>
+                <li><p> Date {{date}}</p></li>
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/buy">Buyers</a></li>
+                <li><a href="/admin/sell">Sellers</a></li>
+                <li><a href="/admin/pending">Pending</a></li>
+                <li><a class="act" href="/admin/products">Products</a></li>
+                <li><a href="/admin/stock">Stock</a></li>
+                <li><a href="/admin/email">Email</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <br>
+                <h3 class="text-center">Products List</h3>
+            <br>
+            <div class="container">
+                    <div><a href="/admin/products/add" class="btn btn-success">Add Product</a></div>
+                </div>
+                <br>
+            <div>
+                <table class="table text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name - price</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<list.length;i++){%>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td> <img class="img-thumbnail" src="data:image/png;base64,<%=list[i].image%>" width="100px" height="100px"></td>
+                            <td> <%=list[i].title%> - ₹ <%=list[i].cost%></td>
+                            <td><a href="/admin/products/update/image/<%=list[i].id%>" class="btn btn-dark">Change</a></td>
+                            <td><a href="/admin/products/update/<%=list[i].id%>" class="btn btn-warning">Update</a></td>
+                            <td><a href="/admin/products/delete/<%=list[i].id%>" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+            new Vue({
+            el:'#app',
+            data:{
+                date:''
+            },
+            created() {
+                var date = new Date();
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                let month = Number(date.getMonth() ) + 1
+                this.date =   date.getDate() + "/" + month  + "/" + date.getFullYear() ;
+            },
+        })
+        </script>
+</body>
+</html>

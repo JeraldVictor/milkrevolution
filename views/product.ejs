@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Shop</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/shop.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar nav sticky-top navbar-dark bg-dark navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="/">Milk Revolution</a>
+                </div>
+                <ul class="nav justify-content-center">
+                    <li> <h4 style="color:white;text-decoration: underline">Our Shop</h4></li>
+                </ul>
+                <ul class="nav justify-content-right">
+                <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span> Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="container">
+                    <br>
+                    <% if(msg!=null){%>
+                        <div id="flash" class="text-center alert alert-<%=alert%>">
+                            <%=msg%>
+                        </div>
+                    <%}%>
+                    <br>
+            </div>
+            <div class="text-center">
+                <div >
+                    <h1>Product Title</h1>
+                    <img src="data:image/png;base64,<%=list.image%>" alt="" width="300px" height="350px">
+                    <br>
+                    <br>
+                    <div class="text-left">
+                       <%=list.msg%>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <br><br>
+        <div class="container">
+            <form action="/buyer" method="POST">
+                <div class="form-group">
+                    <label for="">Date & Time</label>
+                    <input type="text" name="date" id="" readonly class="form-control" :value="date">
+                </div>
+                <div class="form-group">
+                    <label for="">Product</label>
+                    <input type="text" class="form-control" name="product" readonly value="<%=list.title%>">
+                </div>
+                <div class="form-group">
+                    <label for="">Per Rate in Rs.</label>
+                    <input type="number" class="form-control" name="per" readonly value="" v-model="per">
+                </div>
+            <div class="form-group">
+                <label for="">Quantity Needed</label>
+                <input type="number" class="form-control" :class="{'is-valid' : qtErr, 'is-invalid' : !qtErr}" name="qt" v-model="qt">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Enter the Quantity
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Total</label>
+                <input type="number" class="form-control" name="total" readonly v-model="total">
+            </div>
+                <div class="form-group" style="display: none;">
+                    <label for="">pid</label>
+                    <input type="text" class="form-control" name="pid" readonly value="<%=list.id%>">
+                </div>
+                <button :disabled="!btn" type="submit" class="btn btn-success btn-lg btn-block">Order</button>
+            </form>
+        </div>
+        <br><br><br>
+        <div>
+            <p style="color:black;text-align: center">
+                &copy; Team Milk Revolution | Jerald Victor
+                <small class="text-center"> - All Rights Received</small>
+            </p>
+        </div>
+    </div>
+    <script src="/javascripts/vue.js"></script>
+    <script>
+        let b = '<%=list.cost%>'
+        new Vue({
+    el: '#app',
+    data: {
+        date:'',
+        per: b,
+        qt:'',
+        total:0,
+        btn:false,
+        qtErr:false
+    },
+    created() {
+        var date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        let month = Number(date.getMonth() ) + 1
+        this.date =   date.getDate() + "/" + month  + "/" + date.getFullYear() + " - " + strTime;
+    },
+    filters: {
+        cur: function (val) {
+            return `₹ ${ new Intl.NumberFormat('en-IN', {maximumSignificantDigits: 3}).format(val) }`
+        }
+    },
+    watch: {
+        qt(){
+            this.total = this.per * this.qt
+        },
+        total(){
+            if(this.total <= 0 ){
+                this.qtErr = false
+                this.btn = false
+            }else{
+                this.qtErr = true
+                this.btn = true
+            }
+        }
+    },
+});
+    </script>
+</body>
+</html>

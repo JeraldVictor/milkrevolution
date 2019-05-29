@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Pacifico|Ramabhadra&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  </head>
+  <body>
+    <div id="app">
+        <% if(msg!=null){%>
+          <div id="flash" class="text-center alert alert-warning">
+              <%=msg%>
+          </div>
+          <br>
+      <%}%>
+      <transition
+      enter-active-class="animated fadeIn delay-1s"
+      leave-active-class="animated fadeOut delay-1s"
+      appear
+      mode="out-in"
+      >
+      
+        <div class="cont">
+        <h1 class="text-center">Milk <span style="color:yellow">Revolution</span> </h1>
+        <div>
+          <h5 class="text-center"> <span style="color:yellow">Buy</span> | Sell - Milk | <span style="color:yellow">Milk Products</span> </h5>
+          <h6 class="text-center" style="color:yellow">Banglore - India</h6> 
+          <br>
+          <div class="container row text-center">
+            <div class="col">
+                <a class="btn btn-warning btn-lg btn-block" href="/seller">SELL</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-light btn-lg btn-block" href="/buyer">SHOP</a>
+            </div>
+          </div>
+          <br>
+          <div class="container row text-center">
+              <div class="col">
+                  <a class="btn btn-light btn-lg btn-block" href="/login">LOGIN</a>
+              </div>
+              <div class="col">
+                  <a class="btn btn-warning btn-lg btn-block" href="/reg">SIGN UP</a>
+              </div>
+            </div>
+            <br>
+            <div class="foot">
+              <p class="text-center">
+                &copy; Jerald Victor
+                <small class="text-center"> - All Rights Received</small>
+              </p>
+            </div>
+        </div>
+      </div>
+      </transition>
+    </div>
+
+
+
+    <script>
+    new Vue({
+      el:'#app'
+    })
+    </script>
+  </body>
+</html>

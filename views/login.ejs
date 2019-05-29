@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Log In</h3>
+                    <br>
+                    <% if(msg!=null){%>
+                        <div id="flash" class="text-center alert alert-danger">
+                            <%=msg%>
+                        </div>
+                    <%}%>
+                </div>
+                <div class="card-body">
+                    <form action="<%=link%>" method="POST">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <%if(link == '/login'){%>
+                                <input type="number" class="form-control" placeholder="Mobile Number" name="phn">   
+                            <%}else{%>
+                                <input type="text" class="form-control" placeholder="Mobile Number" name="phn">
+                            <%}%>
+                            
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="password" name="password">
+                        </div>
+                        <div class="form-group text-center row">
+                            <div class="col"><a href="/" class="btn btn-warning float-left">Home</a></div>
+                            <div class="col"><input type="submit" value="Login" class="btn btn-warning float-right"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="/reg">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

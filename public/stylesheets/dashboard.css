@@ -1,0 +1,70 @@
+.nav-link,.nav-link:hover{
+    color: white;
+}
+#app .container{
+    padding-left: 0;
+    margin-left: 0;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+#sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #343a40;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+#sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
+
+#sidenav li p{
+  text-align: center;
+  padding: 0px 5px 0px 0px;
+  display: block;
+  color:white;
+  font-weight: bold;
+}
+
+
+#sidenav a:hover {
+  color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  #sidenav {padding-top: 15px;}
+  #sidenav a {font-size: 18px;}
+}
+
+#sidenav ul {
+  padding: 0;
+  list-style-type: none;
+}
+#sidenav ul .act {
+  color:white;
+  font-weight: bolder;
+}
+#app .container{
+  margin: 0;
+}
+
+.main {
+  margin-top: 2%;
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+.scrollmenu{
+  overflow: auto;
+  white-space: nowrap;
+}
