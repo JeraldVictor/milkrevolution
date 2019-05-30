@@ -59,7 +59,7 @@
                                 <tbody>
                                     <%for(let i =0;i<list.length;i++){%>
                                     <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row"><%=i+1%></th>
                                     <td><%=list[i].title%></td>
                                     <td> ₹ <%=list[i].cost%></td>
                                     <td><%= list[i].stock == 'true' ? 'In Stock' : 'Out Of Stock'%></td>

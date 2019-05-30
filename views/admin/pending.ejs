@@ -61,7 +61,7 @@
                                 <tbody>
                                     <%for(let i =0;i<order.length;i++){%>
                                     <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row"><%=i+1%></th>
                                     <td><%=order[i].name%></td>
                                     <td><%=order[i].phn%></td>
                                     <td><%=order[i].product%> - <%=order[i].quantity%></td>
@@ -99,7 +99,7 @@
                         <tbody>
                             <%for(let i =0;i<products.length;i++){%>
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row"><%=i+1%></th>
                                 <td><%=products[i].name%></td>
                                 <td><%=products[i].phn%></td>
                                 <td><%=products[i].product%> - <%=products[i].quantity%></td>
